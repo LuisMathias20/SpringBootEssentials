@@ -2,6 +2,8 @@ package br.com.devdojo.awesome.endpoint;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,7 +58,7 @@ public class StudentEndpoint {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Student> saveStudent(@RequestBody StudentDTO studentParam) {
+	public ResponseEntity<Student> saveStudent(@Valid @RequestBody StudentDTO studentParam) {
 		Student persistStudent = new Student();
 		
 		return new ResponseEntity<>(studentDao.save(persistStudent.convertFromDto(studentParam)), HttpStatus.OK);

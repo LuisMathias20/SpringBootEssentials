@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import br.com.devdojo.dto.StudentDTO;
 
@@ -14,7 +16,12 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotBlank
 	private String name;
+	
+	@Email
+	@NotBlank
+	private String email;
 
 	public Student convertFromDto(StudentDTO studentDto) {
 		Student studentModel = new Student();
@@ -23,6 +30,7 @@ public class Student {
 			studentModel.setId(studentDto.getId());
 		}
 		studentModel.setName(studentDto.getName());
+		studentModel.setEmail(studentDto.getEmail());
 		
 		return studentModel;
 	}
@@ -41,6 +49,14 @@ public class Student {
 	
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override
