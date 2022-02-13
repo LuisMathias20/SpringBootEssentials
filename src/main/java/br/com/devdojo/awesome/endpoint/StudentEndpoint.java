@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,9 +34,9 @@ public class StudentEndpoint {
 	}
 	
 	@GetMapping(path = "/list")
-	public ResponseEntity<Iterable<Student>> listAll() {
+	public ResponseEntity<Iterable<Student>> listAll(Pageable pageable) {
 		
-		return new ResponseEntity<>(studentDao.findAll(), HttpStatus.OK);
+		return new ResponseEntity<>(studentDao.findAll(pageable), HttpStatus.OK);
 	}
 	
 	@GetMapping(path = "/{id}")
